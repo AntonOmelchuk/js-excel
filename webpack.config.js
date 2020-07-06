@@ -2,6 +2,7 @@ const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -20,6 +21,9 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'bundle.[hash].css'
+        }),
         new HtmlWebpackPlugin({
             template: "index.html"
         }),
@@ -32,4 +36,26 @@ module.exports = {
             ],
         }),
     ],
+    module: {
+        rules: [
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                  MiniCssExtractPlugin.loader,
+                  'css-loader',
+                  'sass-loader'
+                ],
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            }
+        ],
+    },
 }
