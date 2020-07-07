@@ -1,0 +1,15 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "rules": {
+    "semi": "off",
+    "max-len": ["error", 120],
+    "no-console": "warn",
+    "linebreak-style": "off"
+  },
+  "extends": ["eslint:recommended", "google"]
+}
