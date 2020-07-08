@@ -12,7 +12,7 @@
   height: $header-height;
   padding: 8px 4px 0;
 
-  & .input {
+  .input {
     margin: 0;
     padding: 2px 7px;
     color: #000;
@@ -32,7 +32,7 @@
     }
   }
 
-  & .button {
+  .button {
     @include button(red)
   }
 }
