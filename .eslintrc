@@ -10,7 +10,9 @@
     "max-len": ["error", 120],
     "no-console": "warn",
     "linebreak-style": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "require-jsdoc": "off",
+    "arrow-parens": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
