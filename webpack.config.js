@@ -44,25 +44,23 @@ module.exports = {
   devtool: isDev ? 'source-map': false,
   devServer: {
     port: 3000,
-    hot: true,
+    hot: isDev,
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: 'excel.html',
       minify: {
         removeComments: isProd,
         collapseWhitespace: isProd,
       },
     }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'src/favicon.ico'),
-          to: path.resolve(__dirname, 'dist'),
-        },
-      ],
-    }),
+    new CopyPlugin([
+      {
+        from: path.resolve(__dirname, 'src/favicon.ico'),
+        to: path.resolve(__dirname, 'dist')
+      }
+    ]),
     new MiniCssExtractPlugin({
       filename: filenameConstructor('css'),
     }),
