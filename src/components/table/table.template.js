@@ -5,14 +5,28 @@ const CHAR_CODES = {
 
 const toChar = (_, index) => String.fromCharCode(CHAR_CODES.A + index)
 
-const createRow = (content = '', index = '') => `
+const createRow = (content = '', index = '') => {
+  const resizeBlock = index ? `<div class="row-resize"></div>` : ''
+  return (`
     <div class="row">
-        <div class="row-info">${index}</div>
+        <div class="row-info">
+            ${index}
+            ${resizeBlock}
+        </div>
         <div class="row-data">${content}</div>
     </div>
-`
+   `)
+}
 
-const createColumn = content => `<div class="column">${content}</div>`
+const createColumn = content => {
+  const resizeBlock = content === 'Z' ? '' : `<div class="column-resize"></div>`
+  return (`
+    <div class="column">
+      ${content}
+      ${resizeBlock}
+    </div>
+  `)
+}
 
 const createCell = () => `<div class="cell" contenteditable spellcheck="false"></div>`
 

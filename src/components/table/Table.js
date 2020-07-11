@@ -9,6 +9,6 @@ export class Table extends ExcelComponent {
   }
 
   toHtml() {
-    return createTable()
+    return createTable(20)
   }
 }
