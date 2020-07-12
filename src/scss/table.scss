@@ -46,6 +46,7 @@
   }
 
   .cell {
+    overflow: hidden;
     padding: 5px;
     outline: none;
 
@@ -53,6 +54,10 @@
       border: none;
       outline: 2px solid $primary-color;
       z-index: 12;
+    }
+
+    &.active {
+      border-right: 2px solid $primary-color;
     }
   }
 
@@ -83,10 +88,6 @@
     bottom: 0;
     right: -2px;
     width: 4px;
-
-    &:hover {
-      cursor: col-resize;
-    }
   }
 
 }

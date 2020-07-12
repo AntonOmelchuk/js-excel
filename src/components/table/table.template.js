@@ -6,7 +6,7 @@ const CHAR_CODES = {
 const toChar = (_, index) => String.fromCharCode(CHAR_CODES.A + index)
 
 const createRow = (content = '', index = '') => {
-  const resizeBlock = index ? `<div class="row-resize"></div>` : ''
+  const resizeBlock = index ? `<div class="row-resize" data-resize="row-resize"></div>` : ''
   return (`
     <div class="row">
         <div class="row-info">
@@ -18,17 +18,19 @@ const createRow = (content = '', index = '') => {
    `)
 }
 
-const createColumn = content => {
-  const resizeBlock = content === 'Z' ? '' : `<div class="column-resize"></div>`
+const createColumn = (content, index) => {
+  const resizeBlock = content === 'Z' ? '' : `<div class="column-resize" data-resize="column-resize"></div>`
   return (`
-    <div class="column">
+    <div class="column" data-type="resizable" data-index="${index}">
       ${content}
       ${resizeBlock}
     </div>
   `)
 }
 
-const createCell = () => `<div class="cell" contenteditable spellcheck="false"></div>`
+const createCell = (content = '', index) => (
+  `<div class="cell" contenteditable spellcheck="false" data-index="${index}"></div>`
+)
 
 export const createTable = (rowsCount = 15) => {
   const colsCount = CHAR_CODES.Z - CHAR_CODES.A + 1
