@@ -55,6 +55,12 @@ class Dom {
   findAll(selector) {
     return document.querySelectorAll(selector)
   }
+
+  css(styles) {
+    Object.keys(styles).forEach(property => {
+      this.$el.style[property] = styles[property]
+    })
+  }
 }
 
 export const $ = selector => new Dom(selector)

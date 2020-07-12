@@ -8,7 +8,7 @@ const toChar = (_, index) => String.fromCharCode(CHAR_CODES.A + index)
 const createRow = (content = '', index = '') => {
   const resizeBlock = index ? `<div class="row-resize" data-resize="row-resize"></div>` : ''
   return (`
-    <div class="row">
+    <div class="row" data-type="resizable">
         <div class="row-info">
             ${index}
             ${resizeBlock}

@@ -23,16 +23,25 @@ export class Table extends ExcelComponent {
       const index = $parent.data.index // active column for resizing
       const cells = this.$root.findAll(`.cell[data-index="${index}"]`)
       const coords = $parent.getCoords()
+      const type = $resizer.data.resize
 
       document.onmousemove = e => {
-        const delta = e.pageX - coords.right
-        const value = coords.width + delta
+        if (type === 'column-resize') {
+          const delta = e.pageX - coords.right
+          const width = coords.width + delta + 'px'
 
-        $parent.$el.style.width = `${value}px`
-        cells.forEach(cell => {
-          cell.classList.add('active')
-          cell.style.width = `${value}px`
-        })
+          $parent.css({width})
+
+          cells.forEach(cell => {
+            cell.classList.add('active')
+            cell.style.width = width
+          })
+        } else {
+          const delta = e.pageY - coords.bottom
+          const height = coords.height + delta + 'px'
+
+          $parent.css({height})
+        }
       }
 
       document.onmouseup = () => {
