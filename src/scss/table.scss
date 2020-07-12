@@ -55,10 +55,6 @@
       outline: 2px solid $primary-color;
       z-index: 12;
     }
-
-    &.active {
-      border-right: 2px solid $primary-color;
-    }
   }
 
   .row-resize, .column-resize {
@@ -68,7 +64,7 @@
     opacity: 0;
 
     &:hover {
-      opacity: 1;
+      opacity: 1!important;
     }
   }
 
@@ -80,6 +76,7 @@
 
     &:hover {
       cursor: row-resize;
+      border-bottom-width: 4px;
     }
   }
 
