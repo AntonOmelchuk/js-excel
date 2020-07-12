@@ -39,6 +39,28 @@ class Dom {
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback)
   }
+
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect()
+  }
+
+  get data() {
+    return this.$el.dataset
+  }
+
+  findAll(selector) {
+    return document.querySelectorAll(selector)
+  }
+
+  css(styles) {
+    Object.keys(styles).forEach(property => {
+      this.$el.style[property] = styles[property]
+    })
+  }
 }
 
 export const $ = selector => new Dom(selector)
