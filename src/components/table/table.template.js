@@ -34,6 +34,7 @@ const createCell = (row) => {
     class="cell"
     contenteditable
     spellcheck="false"
+    data-type="cell"
     data-index="${index}"
     data-id="${row}:${index}">
   </div>`
