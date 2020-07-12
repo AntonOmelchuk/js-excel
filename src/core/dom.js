@@ -52,6 +52,10 @@ class Dom {
     return this.$el.dataset
   }
 
+  find(selector) {
+    return $(document.querySelector(selector))
+  }
+
   findAll(selector) {
     return document.querySelectorAll(selector)
   }
@@ -60,6 +64,14 @@ class Dom {
     Object.keys(styles).forEach(property => {
       this.$el.style[property] = styles[property]
     })
+  }
+
+  addClass(name) {
+    this.$el.classList.add(name)
+  }
+
+  removeClass(name) {
+    this.$el.classList.remove(name)
   }
 }
 
