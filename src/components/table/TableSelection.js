@@ -10,7 +10,7 @@ export class TableSelection {
     this.clear()
     this.currentCell = $el
     this.group.push($el)
-    $el.addClass(TableSelection.className)
+    $el.focus().addClass(TableSelection.className)
   }
 
   selectGroup($elements = []) {
@@ -20,7 +20,6 @@ export class TableSelection {
   }
 
   clear() {
-    this.group.forEach(cell => console.log(cell))
     this.group.forEach(cell => cell.removeClass(TableSelection.className))
     this.group = []
   }

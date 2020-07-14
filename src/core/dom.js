@@ -40,6 +40,11 @@ class Dom {
     this.$el.removeEventListener(eventType, callback)
   }
 
+  focus() {
+    this.$el.focus()
+    return this
+  }
+
   closest(selector) {
     return $(this.$el.closest(selector))
   }

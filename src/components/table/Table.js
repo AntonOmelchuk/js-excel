@@ -1,7 +1,7 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {createTable} from '@/components/table/table.template';
 import {tableResize} from '@/components/table/table.resize';
-import {isCell, matrix, shouldResize} from '@/components/table/table.helpers';
+import {findNextSelector, isCell, matrix, shouldResize} from './table.helpers';
 import {TableSelection} from '@/components/table/TableSelection';
 import {$} from '@core/dom';
 
@@ -10,7 +10,7 @@ export class Table extends ExcelComponent {
 
   constructor($root) {
     super($root, {
-      listeners: ['mousedown']
+      listeners: ['mousedown', 'keydown']
     });
   }
 
@@ -35,14 +35,23 @@ export class Table extends ExcelComponent {
     } else if (isCell(event)) {
       const $cell = $(event.target)
       if (event.shiftKey) {
-        const selected = $cell.id('parse')
-        const current = this.selection.currentCell.id('parse')
-
-        const $selectedCells = matrix(selected, current).map(id => this.$root.find(`[data-id="${id}"]`))
+        const $selectedCells = matrix($cell, this.selection.currentCell).map(id => this.$root.find(`[data-id="${id}"]`))
         this.selection.selectGroup($selectedCells)
       } else {
         this.selection.select($cell)
       }
+    }
+  }
+
+  onKeydown(event) {
+    const keys = ['Enter', 'Tab', 'ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft']
+    const {key} = event
+
+    if (keys.includes(key) && !event.shiftKey) {
+      event.preventDefault()
+      const currentId = this.selection.currentCell.id('parse')
+      const $nextSelector = this.$root.find(findNextSelector(key, currentId))
+      this.selection.select($nextSelector)
     }
   }
 }
