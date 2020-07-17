@@ -28,9 +28,19 @@ const createColumn = (content, index) => {
   `)
 }
 
-const createCell = (content = '', index) => (
-  `<div class="cell" contenteditable spellcheck="false" data-index="${index}"></div>`
-)
+const createCell = (row) => {
+  return function(_, index) {
+    return `<div
+    class="cell"
+    contenteditable
+    spellcheck="false"
+    data-type="cell"
+    data-index="${index}"
+    data-id="${row}:${index}">
+  </div>`
+  }
+}
+
 
 export const createTable = (rowsCount = 15) => {
   const colsCount = CHAR_CODES.Z - CHAR_CODES.A + 1
@@ -45,13 +55,13 @@ export const createTable = (rowsCount = 15) => {
 
   rows.push(createRow(cols))
 
-  const cells = new Array(colsCount)
-      .fill('')
-      .map(createCell)
-      .join('')
+  for (let row = 0; row < rowsCount; row++) {
+    const cells = new Array(colsCount)
+        .fill('')
+        .map(createCell(row))
+        .join('')
 
-  for (let i = 0; i < rowsCount; i++) {
-    rows.push(createRow(cells, i + 1))
+    rows.push(createRow(cells, row + 1))
   }
 
   return rows.join('')
