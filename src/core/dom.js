@@ -85,7 +85,7 @@ class Dom {
   }
 
   findAll(selector) {
-    return document.querySelectorAll(selector)
+    return this.$el.querySelectorAll(selector)
   }
 
   css(styles) {
@@ -96,10 +96,12 @@ class Dom {
 
   addClass(name) {
     this.$el.classList.add(name)
+    return this
   }
 
   removeClass(name) {
     this.$el.classList.remove(name)
+    return this
   }
 }
 
