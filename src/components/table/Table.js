@@ -16,12 +16,12 @@ export class Table extends ExcelComponent {
     });
   }
 
-  toHtml() {
-    return createTable(20)
-  }
-
   prepare() {
     this.selection = new TableSelection()
+  }
+
+  toHtml() {
+    return createTable(20)
   }
 
   init() {
@@ -30,7 +30,8 @@ export class Table extends ExcelComponent {
     const $el = this.$root.find('[data-id="0:0"]')
     this.selection.select($el)
 
-    this.emitter.subscribe('formula', text => this.selection.currentCell.text(text))
+    this.$on('formula:input', text => this.selection.currentCell.text(text))
+    this.$on('formula:pressEnter', () => this.selection.currentCell.focus())
   }
 
   onMousedown(event) {
