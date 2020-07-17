@@ -25,7 +25,6 @@ export const matrix = ($current, $selected) => {
 }
 
 export const findNextSelector = (key, {row, col}) => {
-  console.log(col)
   switch (key) {
     case 'Enter':
     case 'ArrowDown':
