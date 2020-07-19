@@ -31,6 +31,7 @@ export class Table extends ExcelComponent {
 
     this.$on('formula:input', text => this.selection.currentCell.text(text))
     this.$on('formula:pressEnter', () => this.selection.currentCell.focus())
+    this.$subscribe(state => console.log('Table state: ', state))
   }
 
   selectCell($cell) {
@@ -38,16 +39,21 @@ export class Table extends ExcelComponent {
     this.$emit('table:select', $cell)
   }
 
+  async handleTableResize() {
+    const data = await tableResize(this.$root, event)
+    this.$dispatch({type: 'TABLE_RESIZE', data})
+  }
+
   onMousedown(event) {
     if (shouldResize(event)) {
-      tableResize(this.$root, event)
+      this.handleTableResize(event)
     } else if (isCell(event)) {
       const $cell = $(event.target)
       if (event.shiftKey) {
         const $selectedCells = matrix($cell, this.selection.currentCell).map(id => this.$root.find(`[data-id="${id}"]`))
         this.selection.selectGroup($selectedCells)
       } else {
-        this.selection.select($cell)
+        this.selectCell($cell)
       }
     }
   }

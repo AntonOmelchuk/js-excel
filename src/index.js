@@ -7,10 +7,13 @@ import {Table} from '@/components/table/Table';
 import {createStore} from './core/createStore';
 import {rootReducer} from './redux/rootReducer';
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, {
+  tableSize: {}
+})
 
 const excel = new Excel('#app', {
-  components: [Header, Toolbar, Formula, Table]
+  components: [Header, Toolbar, Formula, Table],
+  store: store
 })
 
 excel.render()
