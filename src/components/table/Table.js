@@ -4,6 +4,7 @@ import {tableResize} from '@/components/table/table.resize';
 import {findNextSelector, isCell, matrix, shouldResize} from './table.helpers';
 import {TableSelection} from '@/components/table/TableSelection';
 import {$} from '@core/dom';
+import {setColSize} from '../../redux/actions';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
@@ -31,7 +32,7 @@ export class Table extends ExcelComponent {
 
     this.$on('formula:input', text => this.selection.currentCell.text(text))
     this.$on('formula:pressEnter', () => this.selection.currentCell.focus())
-    this.$subscribe(state => console.log('Table state: ', state))
+    this.$subscribe(state => state)
   }
 
   selectCell($cell) {
@@ -41,7 +42,7 @@ export class Table extends ExcelComponent {
 
   async handleTableResize() {
     const data = await tableResize(this.$root, event)
-    this.$dispatch({type: 'TABLE_RESIZE', data})
+    this.$dispatch(setColSize(data))
   }
 
   onMousedown(event) {
