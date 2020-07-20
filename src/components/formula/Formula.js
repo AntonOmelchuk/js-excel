@@ -20,6 +20,7 @@ export class Formula extends ExcelComponent {
 
     this.$on('table:select', $cell => fillFormulaInput($cell))
     this.$on('table:input', $cell => fillFormulaInput($cell))
+    this.$subscribe(state => state)
   }
 
   toHtml() {

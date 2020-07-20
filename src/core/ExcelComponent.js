@@ -6,8 +6,8 @@ export class ExcelComponent extends DomListener {
     this.name = options.name || ''
     this.emitter = options.emitter
     this.store = options.store
-    this.storeSub = null
     this.unsubscribers = []
+    this.storeSub = null
 
     this.prepare()
   }
