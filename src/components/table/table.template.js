@@ -4,13 +4,18 @@ const CHAR_CODES = {
 }
 
 const DEFAULT_WIDTH = 120
+const DEFAULT_HEIGHT = 24
 
 const toChar = (_, index) => String.fromCharCode(CHAR_CODES.A + index)
 
-const createRow = (content = '', index = '') => {
+const getWidth = (state, index) => state[index] || DEFAULT_WIDTH
+
+const getHeight = (state, index) => state[index] || DEFAULT_HEIGHT
+
+const createRow = (content = '', index = '', state = {}) => {
   const resizeBlock = index ? `<div class="row-resize" data-resize="row-resize"></div>` : ''
   return (`
-    <div class="row" data-type="resizable" data-index="${index}">
+    <div class="row" data-type="resizable" data-index="${index}" style="height:${getHeight(state, index)}">
         <div class="row-info">
             ${index}
             ${resizeBlock}
@@ -45,8 +50,6 @@ const createCell = (row, state) => {
   }
 }
 
-const getWidth = (state, index) => state[index] || DEFAULT_WIDTH
-
 const widthFromState = (state) => (content, index) => ({content, index, width: getWidth(state, index)})
 
 export const createTable = (rowsCount = 15, state) => {
@@ -69,7 +72,7 @@ export const createTable = (rowsCount = 15, state) => {
         .map(createCell(row, state.colSize))
         .join('')
 
-    rows.push(createRow(cells, row + 1))
+    rows.push(createRow(cells, row + 1, state.rowSize))
   }
 
   return rows.join('')
