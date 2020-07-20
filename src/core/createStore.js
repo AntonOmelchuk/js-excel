@@ -1,6 +1,6 @@
-export function createStore(rootReducer, initialState = {}) {
-  let state = rootReducer({...initialState}, {type: '__INIT__'})
-  const listeners = []
+export function createStore(rootReducer, initialState) {
+  let state = rootReducer(initialState, {type: '__INIT__'})
+  let listeners = []
 
   return {
     subscribe(fn) {
@@ -8,16 +8,18 @@ export function createStore(rootReducer, initialState = {}) {
 
       return {
         unsubscribe() {
-          listeners.filter(listener => listener !== fn)
+          listeners = listeners.filter(listener => listener !== fn)
         }
       }
     },
+
     dispatch(action) {
       state = rootReducer(state, action)
       listeners.forEach(listener => listener(state))
     },
-    getState() {
 
+    getState() {
+      return state
     }
   }
 }
