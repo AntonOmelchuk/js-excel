@@ -37,15 +37,18 @@ const createColumn = ({content, index, width}) => {
 
 const createCell = (row, state) => {
   return function(_, index) {
+    const id = `${row}:${index}`
+    const data = state.dataState[id] || ''
     return `<div
     class="cell"
     contenteditable
     spellcheck="false"
     data-type="cell"
     data-index="${index}"
-    data-id="${row}:${index}"
-    style="width:${getWidth(state, index)}"
+    data-id="${id}"
+    style="width:${getWidth(state.colSize, index)}"
     >
+    ${data}
   </div>`
   }
 }
@@ -69,7 +72,7 @@ export const createTable = (rowsCount = 15, state) => {
   for (let row = 0; row < rowsCount; row++) {
     const cells = new Array(colsCount)
         .fill('')
-        .map(createCell(row, state.colSize))
+        .map(createCell(row, state))
         .join('')
 
     rows.push(createRow(cells, row + 1, state.rowSize))

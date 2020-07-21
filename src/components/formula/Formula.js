@@ -19,8 +19,7 @@ export class Formula extends ExcelComponent {
     const fillFormulaInput = $cell => this.$formula.text($cell.text())
 
     this.$on('table:select', $cell => fillFormulaInput($cell))
-    this.$on('table:input', $cell => fillFormulaInput($cell))
-    this.$subscribe(state => state)
+    this.$subscribe(state => this.$formula.text(state.currentText))
   }
 
   toHtml() {
