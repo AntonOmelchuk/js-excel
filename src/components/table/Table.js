@@ -35,7 +35,6 @@ export class Table extends ExcelComponent {
       this.changeText(text)
     })
     this.$on('formula:pressEnter', () => this.selection.currentCell.focus())
-    this.$subscribe(state => state)
   }
 
   changeText(text) {

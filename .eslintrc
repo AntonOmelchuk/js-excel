@@ -12,7 +12,8 @@
     "comma-dangle": "off",
     "require-jsdoc": "off",
     "arrow-parens": "off",
-    "no-case-declarations": "off"
+    "no-case-declarations": "off",
+    "no-prototype-builtins": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
