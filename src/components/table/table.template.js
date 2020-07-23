@@ -12,7 +12,7 @@ const getWidth = (state, index) => state[index] || DEFAULT_WIDTH
 
 const getHeight = (state, index) => state[index] || DEFAULT_HEIGHT
 
-const createRow = (content = '', index = '', state = {}) => {
+const createRow = (content = '', index = '', state) => {
   const resizeBlock = index ? `<div class="row-resize" data-resize="row-resize"></div>` : ''
   return (`
     <div class="row" data-type="resizable" data-index="${index}" style="height:${getHeight(state, index)}">
@@ -46,7 +46,7 @@ const createCell = (row, state) => {
     data-type="cell"
     data-index="${index}"
     data-id="${id}"
-    style="width:${getWidth(state.colSize, index)}"
+    style="width:${getWidth(state, index)}"
     >
     ${data}
   </div>`
@@ -63,7 +63,7 @@ export const createTable = (rowsCount = 15, state) => {
   const cols = new Array(colsCount)
       .fill('')
       .map(toChar)
-      .map(widthFromState(state.colSize))
+      .map(widthFromState(state.colState))
       .map(createColumn)
       .join('')
 
@@ -72,10 +72,10 @@ export const createTable = (rowsCount = 15, state) => {
   for (let row = 0; row < rowsCount; row++) {
     const cells = new Array(colsCount)
         .fill('')
-        .map(createCell(row, state))
+        .map(createCell(row, state.colState))
         .join('')
 
-    rows.push(createRow(cells, row + 1, state.rowSize))
+    rows.push(createRow(cells, row + 1, state.rowState))
   }
 
   return rows.join('')
