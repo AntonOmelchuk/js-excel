@@ -11,37 +11,37 @@ const createButton = ({icon, active, value}) => {
   `
 }
 
-export const toolbarTamplate = () => {
+export const toolbarTamplate = (state) => {
   const buttons = [
     {
       icon: 'format_align_left',
-      active: false,
+      active: state['textAlign'] === 'left',
       value: {textAlign: 'left'}
     },
     {
       icon: 'format_align_center',
-      active: false,
+      active: state['textAlign'] == 'center',
       value: {textAlign: 'center'}
     },
     {
       icon: 'format_align_right',
-      active: false,
+      active: state['textAlign'] === 'right',
       value: {textAlign: 'right'}
     },
     {
       icon: 'format_bold',
-      active: false,
-      value: {fontWeight: 'bold'}
+      active: state['fontWeight'] === 'bold' && true,
+      value: {fontWeight: state['fontWeight'] === 'bold' ? 'normal' : 'bold'}
     },
     {
       icon: 'format_italic',
-      active: false,
-      value: {fontStyle: 'italic'}
+      active: state['fontStyle'] === 'italic' && true,
+      value: {fontStyle: state['fontStyle'] === 'italic' ? 'normal' : 'italic'}
     },
     {
       icon: 'format_underline',
-      active: false,
-      value: {fontDecotarion: 'underline'}
+      active: state['fontDecotarion'] === 'underline' && true,
+      value: {fontDecotarion: state['fontDecotarion'] === 'underline' ? 'none' : 'underline'}
     },
   ]
   return buttons.map(createButton).join('')
