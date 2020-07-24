@@ -40,8 +40,8 @@ export const toolbarTamplate = (state) => {
     },
     {
       icon: 'format_underline',
-      active: state['fontDecotarion'] === 'underline' && true,
-      value: {fontDecotarion: state['fontDecotarion'] === 'underline' ? 'none' : 'underline'}
+      active: state['textDecoration'] === 'underline' && true,
+      value: {textDecoration: state['textDecoration'] === 'underline' ? 'none' : 'underline'}
     },
   ]
   return buttons.map(createButton).join('')

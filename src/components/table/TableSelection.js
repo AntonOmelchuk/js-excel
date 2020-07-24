@@ -23,4 +23,9 @@ export class TableSelection {
     this.group.forEach(cell => cell.removeClass(TableSelection.className))
     this.group = []
   }
+
+  applyStyles(styles) {
+    console.log('styles: ', styles)
+    this.group.forEach(el => el.css(styles))
+  }
 }
