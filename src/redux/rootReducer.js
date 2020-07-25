@@ -1,25 +1,31 @@
-import {TABLE_RESIZE, CHANGE_TEXT} from './types'
+import {TABLE_RESIZE, CHANGE_TEXT, CHANGE_STYLES} from './types'
 
 export function rootReducer(state, action) {
-  let prevState
   switch (action.type) {
     case TABLE_RESIZE:
       const field = action.data.type === 'row-resize' ? 'rowSize' : 'colSize'
-      prevState = state?.colSize || {}
-      prevState[action.data.id] = action.data.value
       return {
         ...state,
-        [field]: prevState
+        [field]: setValue(state, field, action)
       }
     case CHANGE_TEXT:
-      prevState = state['dataState'] || {}
-      prevState[action.data.id] = action.data.value
       return {
         ...state,
         currentText: action.data.value,
-        dataState: prevState
+        dataState: setValue(state, 'dataState', action)
+      }
+    case CHANGE_STYLES:
+      return {
+        ...state,
+        currentStyles: action.data
       }
     default:
       return state
   }
+}
+
+const setValue = (state, field, action) => {
+  const value = state[field] || {}
+  value[action.data.id] = action.data.value
+  return value
 }

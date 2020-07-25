@@ -4,7 +4,7 @@ import {tableResize} from '@/components/table/table.resize';
 import {findNextSelector, isCell, matrix, shouldResize} from './table.helpers';
 import {TableSelection} from '@/components/table/TableSelection';
 import {$} from '@core/dom';
-import {setTableSize, changeText} from '../../redux/actions';
+import {setTableSize, changeText, changeStyles} from '../../redux/actions';
 import {DEFAULT_STYLES} from '../../constants';
 
 export class Table extends ExcelComponent {
@@ -53,7 +53,9 @@ export class Table extends ExcelComponent {
     this.selection.select($cell)
     this.$emit('table:select', $cell)
 
-    $cell.getStyles(Object.keys(DEFAULT_STYLES))
+    const styles = $cell.getStyles(Object.keys(DEFAULT_STYLES))
+    console.log(styles)
+    this.$dispatch(changeStyles(styles))
   }
 
   async handleTableResize(event) {
