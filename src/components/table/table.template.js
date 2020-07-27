@@ -1,5 +1,4 @@
-import {DEFAULT_STYLES} from '../../constants'
-import {camelToDashCase} from '../../core/utils'
+import {toInlineStyles} from '../../core/utils'
 
 const CHAR_CODES = {
   A: 65,
@@ -40,13 +39,12 @@ const createColumn = ({content, index, width}) => {
 }
 
 const createCell = (row, state) => {
+  console.log(state)
   return function(_, index) {
     const id = `${row}:${index}`
     const data = state.dataState[id] || ''
     const width = getWidth(state.colState, index)
-    const styles = Object.keys(DEFAULT_STYLES)
-        .map(key => `${camelToDashCase(key)}: ${DEFAULT_STYLES[key]}`)
-        .join(';')
+    const styles = toInlineStyles(state.stylesState[id])
     return `<div
     class="cell"
     contenteditable

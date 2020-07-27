@@ -4,7 +4,7 @@ import {tableResize} from '@/components/table/table.resize';
 import {findNextSelector, isCell, matrix, shouldResize} from './table.helpers';
 import {TableSelection} from '@/components/table/TableSelection';
 import {$} from '@core/dom';
-import {setTableSize, changeText, changeStyles} from '../../redux/actions';
+import {setTableSize, changeText, changeStyles, applyStyle} from '../../redux/actions';
 import {DEFAULT_STYLES} from '../../constants';
 
 export class Table extends ExcelComponent {
@@ -37,8 +37,9 @@ export class Table extends ExcelComponent {
     })
     this.$on('formula:pressEnter', () => this.selection.currentCell.focus())
 
-    this.$on('toolbar:applyStyles', state => {
-      this.selection.applyStyles(state)
+    this.$on('toolbar:applyStyles', value => {
+      this.selection.applyStyles(value)
+      this.$dispatch(applyStyle({value, ids: this.selection.selectedIds}))
     })
   }
 
