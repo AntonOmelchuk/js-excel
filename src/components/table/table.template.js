@@ -40,7 +40,6 @@ const createColumn = ({content, index, width}) => {
 }
 
 const createCell = (row, state) => {
-  console.log(state)
   return function(_, index) {
     const id = `${row}:${index}`
     const data = state.dataState[id] || ''

@@ -4,3 +4,5 @@ export const DEFAULT_STYLES = {
   fontStyle: 'normal',
   textDecoration: 'none'
 }
+
+export const DEFAULT_TITLE = 'New table'
