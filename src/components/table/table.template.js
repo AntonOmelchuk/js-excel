@@ -1,5 +1,6 @@
 import {toInlineStyles} from '../../core/utils'
 import {DEFAULT_STYLES} from '../../constants'
+import {parse} from '../../core/parse'
 
 const CHAR_CODES = {
   A: 65,
@@ -55,9 +56,10 @@ const createCell = (row, state) => {
     data-type="cell"
     data-index="${index}"
     data-id="${id}"
+    data-value="${data || ''}"
     style="${styles}; width:${width}"
     >
-    ${data}
+    ${parse(data) || ''}
   </div>`
   }
 }
