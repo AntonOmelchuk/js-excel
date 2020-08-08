@@ -19,12 +19,12 @@
 
   .row-info, .column {
     background: #f8f9fa;
-  }
-
-  .row-info, .column, .cell {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .row-info, .column, .cell {
     height: 100%;
     border: 1px solid $border-color;
     border-top: none;
@@ -49,6 +49,7 @@
     overflow: hidden;
     padding: 5px;
     outline: none;
+    color: #000;
 
     &.selected {
       border: none;

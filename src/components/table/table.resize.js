@@ -44,7 +44,8 @@ export const tableResize = (root, event) => {
 
       resolve({
         id: index,
-        value
+        value,
+        type
       })
 
       $resizer.css({
