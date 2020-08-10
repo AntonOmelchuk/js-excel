@@ -4,6 +4,7 @@ export class ActiveRoute {
   }
 
   static get param() {
-    return ActiveRoute.path.split('/')[0]
+    console.log('path: ', ActiveRoute.path.split('/'))
+    return ActiveRoute.path.split('/')
   }
 }

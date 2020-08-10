@@ -20,7 +20,6 @@ export class Header extends ExcelComponent {
 
   toHtml() {
     const title = this.store.getState().title
-    console.log(title)
     return `
       <input type="text" class="input" value="${title}" />
       <div>
