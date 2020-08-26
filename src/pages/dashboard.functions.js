@@ -1,9 +1,14 @@
-const toHTML = () => (
-  `<li class="db__record">
-    <a href="">Table number 1</a>
-    <strong>7/8/2020</strong>
-  </li>`
-)
+import {storage} from '../core/utils'
+
+const toHTML = (key) => {
+  const model = storage(key)
+  const id = key.split(':')[1]
+
+  return `<li class="db__record">
+  <a href="#excel/${id}">${model.title}</a>
+  <strong>7/8/2020</strong>
+</li>`
+}
 
 const getAllKeys = () => {
   const keys = []
