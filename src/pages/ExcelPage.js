@@ -10,7 +10,8 @@ import {storage, debounce} from '@core/utils';
 import {normalizeInitState} from '../redux/initialState';
 export class ExcelPage extends Page {
   getRoot() {
-    const storageName = `excel:${this.params[1] || Date.now().toString()}`
+    console.log('this params', this.params)
+    const storageName = `excel:${this.params || Date.now().toString()}`
     const state = storage(storageName)
     const store = createStore(rootReducer, normalizeInitState(state))
 

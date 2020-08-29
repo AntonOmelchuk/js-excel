@@ -1,6 +1,6 @@
 export const capitalizeFirstChar = string => !string ? '' : string[0].toUpperCase() + string.slice(1)
 
-export const storage = (key, data) => {
+export const storage = (key, data = null) => {
   if (!data) {
     return JSON.parse(localStorage.getItem(key))
   }
